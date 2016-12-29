@@ -1,7 +1,7 @@
-@import "vendor/normalize";
-
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import "bootstrap";
 @import "bourbon";
-@import "base/base";
-@import "neat";
 
-@import "global";
+@import "top";
+@import "timeline";

@@ -1,0 +1,153 @@
+$title-size: 26px;
+$item-spacing: 50px;
+$image-size: 50px;
+$timeline-width: 10px;
+$branch-width: 4px;
+$branch-length: 400px;
+$branch-pos: ($image-size / 2) - $branch-width;
+$title-padding: 7px;
+$single-column-line-padding: 50px;
+$minimum-two-columns: $branch-length * 2 + $single-column-line-padding;
+$line-color: #22004B;
+$branch-color: lighten($line-color, 30%);
+
+section.timeline-header {
+  padding-top: 50px;
+}
+
+section.timeline {
+  min-height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  
+  &:before {
+    position: absolute;
+    min-width: 10px;
+    top: 0;
+    left: calc(50% - 5px);  
+    background-color: $line-color;
+    min-height: 100%;
+    display: block;
+    content: "";
+    z-index: -1;
+    transition: left 250ms ease-out;
+    @media (max-device-width: #{$minimum-two-columns}) {
+      left: $single-column-line-padding;  
+    }
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-left: 50%;
+    margin-bottom: 250px;
+    
+    transition: margin-left 250ms ease-out;
+    @media (max-device-width: #{$minimum-two-columns}) {
+      margin-left: $single-column-line-padding;  
+    }
+    
+    
+    &:first-child {
+      transform: translateY(0);
+      margin-top: 35vh;
+      visibility: visible;
+    }
+    
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: $branch-pos;
+      left: 0;
+      z-index: -1;
+      min-width: $branch-length;
+      min-height: $branch-width;
+      @include linear-gradient(to right, $branch-color, lighten($branch-color, 30%));
+    }
+    
+    img {
+      margin-left: $image-size / -2;
+      border: $branch-width solid $branch-color;
+      padding: $branch-width;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+    
+    .title {
+      position: absolute;
+      font-size: $title-size;
+      top: $branch-pos - ($branch-width / 2) - $title-size - $title-padding;
+      left: ($image-size / 2) - $branch-width + $title-padding;
+    }
+    
+    .date {
+      position: absolute;
+      width: 100%;
+      top: ($image-size / 2) - ($title-size / 1.5);
+      right: calc(100% + #{(($image-size / 2) + $title-padding)});
+      z-index: -10;
+      font-size: $title-size / 1.5;
+      font-weight: 100;
+      text-align: right;
+      
+      transition: top 250ms ease-out, left 400ms ease-out;
+      
+      @media (max-device-width: #{$minimum-two-columns}) {
+        text-align: left;
+        top: $branch-pos + ($branch-width / 2) + $title-padding;
+        left: ($image-size / 2) - $branch-width + $title-padding;
+      }
+    }
+    
+    .content {
+      position: absolute;
+      
+      top: $branch-pos + ($branch-width / 2) + $title-padding;
+      left: ($image-size / 2) - $branch-width + $title-padding;
+      
+      max-width: $branch-length - ($image-size / 2) - $title-padding;
+      
+      transition: top 250ms ease-out;
+      
+      @media (max-device-width: #{$minimum-two-columns}) {
+        top: $branch-pos + ($branch-width / 2) + $title-padding + ($title-size / 1.4);
+      }
+    }
+    
+    @media screen and (min-device-height: 650px) {
+      visibility: hidden;
+      transform: translateY(300px);
+      transition: transform 250ms ease-out;
+
+      &.scrolled {
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+    
+    @media (min-device-width: #{$minimum-two-columns}) {
+      &:nth-child(even) {
+        .date {
+          text-align: left;
+          left: ($image-size / 2) - $branch-width + $title-padding;;
+        }
+        .title {
+          text-align: right;
+          left: auto;
+          right: calc(100% + #{($image-size / 2) - $branch-width + $title-padding});
+        }
+       .content {
+          text-align: right;
+          left: auto;
+          width: $branch-length - ($image-size / 2) - $title-padding;
+          right: calc(100% + #{($image-size / 2) - $branch-width + $title-padding});
+        }
+        &:before {
+          left: -$branch-length;
+          @include linear-gradient(to left, $branch-color, lighten($branch-color, 30%));
+        }
+      }
+    }
+  }
+}

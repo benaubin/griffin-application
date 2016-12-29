@@ -1,0 +1,74 @@
+@include keyframes(gradient-animate){
+  0%{background-position: 0% 0%}
+  50%{background-position: 100% 100%}
+  100%{background-position:0% 0%}
+};
+
+section.top {
+  height: 100vh;
+  @include linear-gradient(to top, #14002F, #22004B, #47004B);
+  background-size: 300%;
+  position: relative;
+  color: #FFF;
+  #name-block {
+    padding-top: 40vh;
+    transition: padding-top 250ms ease-out;
+    @media (max-device-width: 500px) {
+      padding-top: 20vh;
+    }
+    @media (max-device-height: 425px) {
+      padding-top: 10vh;
+    }
+  }
+  .name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 92px;
+    font-weight: 200;
+    
+    transition: font-size 250ms ease-out;
+    @media (max-device-width: 300px), (max-device-height: 300px) {
+      @media (orientation: portrait) {
+        font-size: 29vw;
+      }
+      @media (orientation: landscape){
+        font-size: 28vh;
+      }
+    }
+  }
+  .scroll-button {
+    position: absolute;
+    bottom: 20vh;
+    width: 100%;
+    opacity: .9;
+    text-align: center;
+    
+    transition: bottom 250ms ease-out;
+    @media (max-device-width: 500px) and (max-device-height: 450px) {
+      bottom: 5vh;
+    }
+    
+    @media (max-device-height: 125px) {
+      display: none;
+    }
+    
+    i {
+      font-size: 72px;
+      border: 3px solid #FFF;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: background-color 1s ease-in, color 1s ease-in, border-color 1s ease-in;
+      &:hover {
+        cursor: pointer;
+        background-color: #FFF;
+        color: #22004B;
+        border-color: transparent;
+      }
+      
+      transition: font-size 250ms ease-out;
+      @media (max-device-height: 330px) {
+        font-size: 21vh;
+      }
+    }
+  }
+  @include animation(gradient-animate 12s linear infinite);
+}
