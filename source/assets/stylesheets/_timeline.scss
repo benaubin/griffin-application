@@ -130,11 +130,12 @@ section.timeline {
       &:nth-child(even) {
         .date {
           text-align: left;
-          left: ($image-size / 2) - $branch-width + $title-padding;;
+          left: ($image-size / 2) - $branch-width + $title-padding;
         }
         .title {
           text-align: right;
           left: auto;
+          width: $branch-length - ($image-size / 2) - $title-padding;
           right: calc(100% + #{($image-size / 2) - $branch-width + $title-padding});
         }
        .content {
