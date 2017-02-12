@@ -28,11 +28,19 @@ $ ->
     decrypted = nacl.util.encodeUTF8(decrypted)
     # Parse the JSON string
     decrypted = JSON.parse(decrypted)
-    for info in decrypted
+    for info in decrypted.information
       card = information.find(".card-template .card").clone()
       card.find('.card-title').text(info.value)
       card.find('.card-subtitle').text(info.title)
       card.appendTo(information)
+
+    shortResponse = $('#short-response')
+
+    for {prompt, answer} in decrypted.shortResponse
+      response = shortResponse.find(".response-template .response").clone()
+      response.find('.prompt').text(prompt)
+      response.find('.answer').text(answer)
+      response.appendTo(shortResponse)
 
     $('.share-alert').show().click ->
       location.hash = ""

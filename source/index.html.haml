@@ -95,7 +95,7 @@ title: Ben Aubin
   .container
     .row
       .col-md-8.offset-md-2
-        .row#information{data: {encrypted: encrypt_data(data.student.information, data.secret)}}
+        .row#information{data: {encrypted: encrypt_data(data.student, data.secret)}}
           .alert.alert-warning.share-alert(role="alert" style="display: none")
             <strong>Before you share:</strong> This section is encrypted and contains personal information.
             Before sharing this application, click here to remove the encryption key from the link.
@@ -108,6 +108,11 @@ title: Ben Aubin
               .card-block
                 %p.lead.card-title
                 %h6.mb2.card-subtitle.text-muted
+        .row.my-4#short-response
+          .response-template(style="display: none")
+            .row.my-1.response
+              %h3.prompt Prompt
+              %p.lead.answer response
 %section.signature
   .text-xs-center.header
     %h2 Signature
