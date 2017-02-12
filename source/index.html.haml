@@ -108,3 +108,26 @@ title: Ben Aubin
               .card-block
                 %p.lead.card-title
                 %h6.mb2.card-subtitle.text-muted
+%section.signature
+  .text-xs-center.header
+    %h2 Signature
+  .container
+    .row
+      %p.lead
+        By signing below, I affirm that all information in this Application for Admission is correct and
+        complete to the best of my knowledge and that I have not withheld information that is
+        pertinent to my application for enrollment at Griffin School.
+      %p.lead
+        Griffin School is an educational community that is more than the sum of its academic parts.
+        Being a Griffin School student entails more than merely attending classes and completing
+        school work. It requires that you make a commitment to the Essential Values of the school
+        and participate fully in school activities and events.
+      %p.lead
+        By signing below, I signify that I understand the commitment asked of Griffin School students,
+        and I agree to active involvement in the school community as indicated above.
+      .row
+        .col-xs-auto
+          Not signed yet... soon!
+          =# image_tag 'signature.png'
+        .col-xs-auto.mt-5
+          %p.lead.date= DateTime.now.strftime("%B %e, %Y")
