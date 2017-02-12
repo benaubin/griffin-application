@@ -4,6 +4,7 @@ activate :sprockets
 
 set :relative_links, true
 set :css_dir, "assets/stylesheets"
+set :build_dir, 'docs'
 set :js_dir, "assets/javascripts"
 set :images_dir, "assets/images"
 set :fonts_dir, "assets/fonts"
