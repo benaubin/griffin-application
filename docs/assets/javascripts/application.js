@@ -3,7 +3,7 @@
 !function(e,n){"use strict";"undefined"!=typeof module&&module.exports?module.exports=n():e.nacl?e.nacl.util=n():(e.nacl={},e.nacl.util=n())}(this,function(){"use strict";var e={};return e.decodeUTF8=function(e){var n,t=unescape(encodeURIComponent(e)),r=new Uint8Array(t.length);for(n=0;n<t.length;n++)r[n]=t.charCodeAt(n);return r},e.encodeUTF8=function(e){var n,t=[];for(n=0;n<e.length;n++)t.push(String.fromCharCode(e[n]));return decodeURIComponent(escape(t.join("")))},e.encodeBase64=function(e){if("undefined"==typeof btoa)return new Buffer(e).toString("base64");var n,t=[],r=e.length;for(n=0;r>n;n++)t.push(String.fromCharCode(e[n]));return btoa(t.join(""))},e.decodeBase64=function(e){if("undefined"==typeof atob)return new Uint8Array(Array.prototype.slice.call(new Buffer(e,"base64"),0));var n,t=atob(e),r=new Uint8Array(t.length);for(n=0;n<t.length;n++)r[n]=t.charCodeAt(n);return r},e});
 (function() {
   $(function() {
-    var card, decrypted, e, encrypted, info, information, j, key, len, nonce, ref;
+    var answer, card, decrypted, e, encrypted, info, information, j, k, key, len, len1, nonce, prompt, ref, ref1, ref2, ref3, response, shortResponse;
     $('.scroll-button').click(function() {
       return $('html, body').animate({
         scrollTop: $('.about').offset().top
@@ -25,12 +25,22 @@
     if (decrypted) {
       decrypted = nacl.util.encodeUTF8(decrypted);
       decrypted = JSON.parse(decrypted);
-      for (j = 0, len = decrypted.length; j < len; j++) {
-        info = decrypted[j];
+      ref1 = decrypted.information;
+      for (j = 0, len = ref1.length; j < len; j++) {
+        info = ref1[j];
         card = information.find(".card-template .card").clone();
         card.find('.card-title').text(info.value);
         card.find('.card-subtitle').text(info.title);
         card.appendTo(information);
+      }
+      shortResponse = $('#short-response');
+      ref2 = decrypted.shortResponse;
+      for (k = 0, len1 = ref2.length; k < len1; k++) {
+        ref3 = ref2[k], prompt = ref3.prompt, answer = ref3.answer;
+        response = shortResponse.find(".response-template .response").clone();
+        response.find('.prompt').text(prompt);
+        response.find('.answer').text(answer);
+        response.appendTo(shortResponse);
       }
       $('.share-alert').show().click(function() {
         location.hash = "";
