@@ -1,0 +1,19 @@
+.header {
+  height: 184px;
+  position: relative;
+  @include dark-gradient();
+
+  text-align: center;
+
+  background-position: fixed;
+
+  margin-bottom: 60px;
+}
+.header h2 {
+  color: white;
+  position: absolute;
+  top: 46px;
+  font-weight: 200;
+  font-size: 92px;
+  width: 100%;
+}

@@ -6,11 +6,13 @@ source "https://rubygems.org"
 # gem "wdm", "~> 0.1.0", platforms: [:mswin, :mingw]
 # gem "tzinfo-data", platforms: [:mswin, :mingw, :jruby]
 
-gem "middleman", "~> 4.0"
-gem "middleman-autoprefixer", "~> 2.6"
-gem "middleman-deploy", "= 2.0.0.pre.alpha"
-gem "middleman-livereload", "~> 3.4"
-gem "middleman-sprockets", '~> 4.1.0'
-gem "sassc", "~> 1.8"
+gem "middleman"
+gem "middleman-autoprefixer"
+gem "middleman-livereload"
+gem "middleman-sprockets"
+#gem "sassc", "~> 1.8"
 gem 'bootstrap', '~> 4.0.0.alpha5'
 gem "bourbon"
+
+# For crypto
+gem 'rbnacl'

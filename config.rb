@@ -2,13 +2,14 @@ activate :directory_indexes
 activate :autoprefixer
 activate :sprockets
 
-
 set :relative_links, true
 set :css_dir, "assets/stylesheets"
 set :js_dir, "assets/javascripts"
 set :images_dir, "assets/images"
 set :fonts_dir, "assets/fonts"
 set :layout, "layouts/application"
+
+sprockets.append_path File.join "#{root}", "bower_components"
 
 page '/*.xml', layout: false
 page '/*.json', layout: false
@@ -22,7 +23,34 @@ configure :build do
   activate :relative_assets
 end
 
-activate :deploy do |deploy|
-  deploy.build_before = true
-  deploy.deploy_method = :git
+require 'rbnacl'
+require 'securerandom'
+require 'json'
+require 'base64'
+
+
+helpers do
+  def encrypt_data(data, key)
+    new_key = false
+    key = if key
+            Base64.decode64 key
+          else
+            warn "Key not previously set. Generating new one. You'll want to save this in data/secret.json for future use."
+            new_key = true
+            RbNaCl::Random.random_bytes RbNaCl::SecretBox.key_bytes
+          end
+    box = RbNaCl::SecretBox.new(key)
+
+    nonce = RbNaCl::Random.random_bytes(box.nonce_bytes)
+
+    if new_key
+      puts "Key: #{Base64.strict_encode64(key)}"
+    else
+      puts 'Using key from data/secret.json'
+    end
+
+    encrypted = box.encrypt(nonce, data.to_json)
+
+    [Base64.strict_encode64(encrypted), Base64.strict_encode64(nonce)].join(';')
+  end
 end

@@ -1,7 +1,7 @@
 $title-size: 26px;
 $item-spacing: 50px;
 $image-size: 50px;
-$timeline-width: 10px;
+$timeline-width: 16px;
 $branch-width: 4px;
 $branch-length: 400px;
 $branch-pos: ($image-size / 2) - $branch-width;
@@ -16,17 +16,17 @@ section.timeline-header {
 }
 
 section.timeline {
+  margin-top: 30px;
   min-height: 100vh;
-  overflow: hidden;
   width: 100%;
   position: relative;
   
   &:before {
     position: absolute;
-    min-width: 10px;
+    min-width: $timeline-width;
     top: 0;
-    left: calc(50% - 5px);  
-    background-color: $line-color;
+    left: calc(50% - #{$timeline-width / 2});  
+    @include dark-gradient();
     min-height: 100%;
     display: block;
     content: "";
@@ -50,7 +50,7 @@ section.timeline {
     
     &:first-child {
       transform: translateY(0);
-      margin-top: 35vh;
+      margin-top: -5px;
       visibility: visible;
     }
     
