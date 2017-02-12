@@ -2,6 +2,5 @@
 /.bundle
 /.cache
 /.sass-cache
-/build
 Gemfile.lock
 /data
