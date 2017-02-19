@@ -3,7 +3,7 @@
 !function(e,n){"use strict";"undefined"!=typeof module&&module.exports?module.exports=n():e.nacl?e.nacl.util=n():(e.nacl={},e.nacl.util=n())}(this,function(){"use strict";var e={};return e.decodeUTF8=function(e){var n,t=unescape(encodeURIComponent(e)),r=new Uint8Array(t.length);for(n=0;n<t.length;n++)r[n]=t.charCodeAt(n);return r},e.encodeUTF8=function(e){var n,t=[];for(n=0;n<e.length;n++)t.push(String.fromCharCode(e[n]));return decodeURIComponent(escape(t.join("")))},e.encodeBase64=function(e){if("undefined"==typeof btoa)return new Buffer(e).toString("base64");var n,t=[],r=e.length;for(n=0;r>n;n++)t.push(String.fromCharCode(e[n]));return btoa(t.join(""))},e.decodeBase64=function(e){if("undefined"==typeof atob)return new Uint8Array(Array.prototype.slice.call(new Buffer(e,"base64"),0));var n,t=atob(e),r=new Uint8Array(t.length);for(n=0;n<t.length;n++)r[n]=t.charCodeAt(n);return r},e});
 (function() {
   $(function() {
-    var answer, answerEl, card, decrypted, e, encrypted, info, information, j, k, key, l, len, len1, len2, nonce, paragraph, prompt, r, ref, ref1, ref2, ref3, response, shortResponse;
+    var answer, answerEl, card, decrypted, e, encrypted, i, info, information, j, k, key, len, len1, len2, nonce, paragraph, prompt, r, ref, ref1, ref2, ref3, response, shortResponse;
     $('.scroll-button').click(function() {
       return $('html, body').animate({
         scrollTop: $('.about').offset().top
@@ -26,8 +26,8 @@
       decrypted = nacl.util.encodeUTF8(decrypted);
       decrypted = JSON.parse(decrypted);
       ref1 = decrypted.information;
-      for (j = 0, len = ref1.length; j < len; j++) {
-        info = ref1[j];
+      for (i = 0, len = ref1.length; i < len; i++) {
+        info = ref1[i];
         card = information.find(".card-template .card").clone();
         card.find('.card-title').text(info.value);
         card.find('.card-subtitle').text(info.title);
@@ -35,44 +35,27 @@
       }
       shortResponse = $('#short-response');
       ref2 = decrypted.shortResponse;
-      for (k = 0, len1 = ref2.length; k < len1; k++) {
-        r = ref2[k];
+      for (j = 0, len1 = ref2.length; j < len1; j++) {
+        r = ref2[j];
         prompt = r.prompt, answer = r.answer;
         response = shortResponse.find(".response-template .response").clone();
         response.find('.prompt').text(prompt);
         answerEl = response.find('.answer');
         ref3 = answer.split("\n\n");
-        for (l = 0, len2 = ref3.length; l < len2; l++) {
-          paragraph = ref3[l];
+        for (k = 0, len2 = ref3.length; k < len2; k++) {
+          paragraph = ref3[k];
           answerEl.clone().text(paragraph).appendTo(response);
         }
         answerEl.remove();
         response.appendTo(shortResponse);
       }
-      $('.share-alert').show().click(function() {
+      return $('.share-alert').show().click(function() {
         location.hash = "";
         return location.reload(true);
       });
     } else {
-      $('.alert-danger').show();
+      return $('.alert-danger').show();
     }
-    return $('.timeline-item').each(function(i) {
-      var item, scrollPoint;
-      item = $(this);
-      scrollPoint = $(this).offset().top - 150;
-      $(window).resize(function() {
-        return scrollPoint = item.offset().top - 150;
-      });
-      return $(window).scroll(function() {
-        var scrolledAt;
-        scrolledAt = $(window).scrollTop() + $(window).height();
-        if (scrolledAt > scrollPoint) {
-          return item.addClass('scrolled');
-        } else if (scrolledAt + 150 < scrollPoint) {
-          return item.removeClass('scrolled');
-        }
-      });
-    });
   });
 
 }).call(this);
