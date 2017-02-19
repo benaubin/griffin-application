@@ -31,11 +31,11 @@ require 'base64'
 
 
 helpers do
-  def encrypt_data(data, key)
+  def encrypt_data(data_to_encrypt)
     new_key = false
-    key = if key
-            Base64.decode64 key
-          else
+    key = begin
+            Base64.decode64 data.secret
+          rescue
             warn "Key not previously set. Generating new one. You'll want to save this in data/secret.json for future use."
             new_key = true
             RbNaCl::Random.random_bytes RbNaCl::SecretBox.key_bytes
@@ -50,7 +50,7 @@ helpers do
       puts 'Using key from data/secret.json'
     end
 
-    encrypted = box.encrypt(nonce, data.to_json)
+    encrypted = box.encrypt(nonce, data_to_encrypt.to_json)
 
     [Base64.strict_encode64(encrypted), Base64.strict_encode64(nonce)].join(';')
   end
