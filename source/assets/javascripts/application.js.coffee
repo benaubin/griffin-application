@@ -36,10 +36,14 @@ $ ->
 
     shortResponse = $('#short-response')
 
-    for {prompt, answer} in decrypted.shortResponse
+    for r in decrypted.shortResponse
+      {prompt, answer} = r
       response = shortResponse.find(".response-template .response").clone()
       response.find('.prompt').text(prompt)
-      response.find('.answer').text(answer)
+      answerEl = response.find('.answer')
+      for paragraph in answer.split("\n\n")
+        answerEl.clone().text(paragraph).appendTo(response)
+      answerEl.remove()
       response.appendTo(shortResponse)
 
     $('.share-alert').show().click ->
