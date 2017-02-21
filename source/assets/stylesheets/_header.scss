@@ -1,5 +1,5 @@
 .header {
-  height: 184px;
+  min-height: 184px;
   position: relative;
   @include dark-gradient();
 
@@ -11,8 +11,8 @@
 }
 .header h2 {
   color: white;
-  position: absolute;
-  top: 46px;
+  padding-top: 46px;
+  padding-bottom: 46px;
   font-weight: 200;
   font-size: 92px;
   width: 100%;

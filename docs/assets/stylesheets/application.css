@@ -7408,7 +7408,7 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   100% {
     background-position: 0% 0%; } }
 .header {
-  height: 184px;
+  min-height: 184px;
   position: relative;
   background-color: #14002F;
   background-image: -webkit-linear-gradient(bottom, #14002F, #22004B, #47004B);
@@ -7424,8 +7424,8 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 
 .header h2 {
   color: white;
-  position: absolute;
-  top: 46px;
+  padding-top: 46px;
+  padding-bottom: 46px;
   font-weight: 200;
   font-size: 92px;
   width: 100%; }
